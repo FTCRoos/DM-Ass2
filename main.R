@@ -1,12 +1,13 @@
-library(rpart)
-library(rpart.plot)
-
-print("main.R")
-
 #import data
-ds <- getDatasets(includeBigrams=FALSE)
-train <- ds$train
-test <- ds$test
+# Only unigrams
+ds.unigram <- getDatasets(includeBigrams=FALSE)
+train.unigram <- ds.unigram$train
+test.unigram <- ds.unigram$test
+# bigrams and unigrams
+ds.both <- getDatasets(includeBigrams=TRUE)
+train.both <- ds.both$train
+test.both <- ds.both$test
 
-#TEST
-rpart.unigrams <- rpart(labels~., data=train,cp=0,method="class", minbucket = 1, minsplit = 2 )
+# Construct and tune classification trees
+classificationTree(train.unigrams, test.unigrams, seed=1)
+classificationTree(train.both, test.both, seed=1)
