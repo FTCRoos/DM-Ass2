@@ -14,3 +14,4 @@ test.both <- ds.both$test
 
 # Create 
 logisticRegression(train.unigram, test.unigram, seed=1)
+
