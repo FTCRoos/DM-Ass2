@@ -34,4 +34,3 @@ cp.select <- function(big.tree) {
     if(big.tree$cptable[i, 4] < big.tree$cptable[min.x, 4] + big.tree$cptable[min.x, 5]) return(big.tree$cptable[i, 1]) #column 5: xstd, column 1: cp 
   }
 }
-

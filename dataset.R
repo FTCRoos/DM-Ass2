@@ -24,7 +24,7 @@ preprocess <- function(corpus.dec, corpus.true, includeBigrams){
   review.all <- tm_map(review.all, removeNumbers)
   review.all <- tm_map(review.all, removePunctuation)
   review.all <- tm_map(review.all, stripWhitespace)
-  review.all <- tm_map(review.all,removeWords,stopwords("english"))
+  review.all <- tm_map(review.all, removeWords,stopwords("english"))
   
   return (review.all)
 }
@@ -58,7 +58,6 @@ getDatasets <- function(includeBigrams){
     training.dtm <- cbind(training.dtm.unigrams, labels)
   }
   
-  
   # TEST SET
   deceptive.test <- readfolds("op_spam_v1.4/negative_polarity/deceptive_from_MTurk", c(5))
   truthful.test <- readfolds("op_spam_v1.4/negative_polarity/truthful_from_Web", c(5))
@@ -81,7 +80,6 @@ getDatasets <- function(includeBigrams){
   } else {
     test.dtm <- cbind(test.dtm.unigrams,labels)
   }
-  
   
   # COMBINE TRAIN AND TEST SET
   dataset <- list()

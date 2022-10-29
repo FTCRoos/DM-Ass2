@@ -1,5 +1,3 @@
-
-
 getScore <- function(results){
   TP <- results[1]
   TN <- results[4]

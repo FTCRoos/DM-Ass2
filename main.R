@@ -1,3 +1,10 @@
+source("dataset.R")
+source("score.R")
+source("multinomialNaiveBayes.R")
+source("regression.R")
+source("tree.R")
+source("randomForest.R")
+
 #import data
 # Only unigrams
 ds.unigram <- getDatasets(includeBigrams=FALSE)
@@ -8,10 +15,15 @@ ds.both <- getDatasets(includeBigrams=TRUE)
 train.both <- ds.both$train
 test.both <- ds.both$test
 
-# Construct and tune classification trees
-# classificationTree(train.unigrams, test.unigrams, seed=1)
-# classificationTree(train.both, test.both, seed=1)
+#
+multinomailNaiveBayes(train.unigram, test.unigram, seed=1)
 
 # Create 
-logisticRegression(train.unigram, test.unigram, seed=1)
+#logisticRegression(train.unigram, test.unigram, seed=1)
 
+# Construct and tune classification trees
+#classificationTree(train.unigrams, test.unigrams, seed=1)
+#classificationTree(train.both, test.both, seed=1)
+
+#
+#classificationRandomForest(train.unigram, test.unigram, seed=1)

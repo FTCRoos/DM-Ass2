@@ -12,5 +12,3 @@ logisticRegression <- function(trainingSet, testSet, seed){
   reviews.logreg.pred <- predict(reviews.glmnet,newx=newX,s="lambda.1se",type="class") 
   print(table(reviews.logreg.pred,testSet$labels))
 }
-
-logisticRegression(train.unigram, test.unigram, seed=1)

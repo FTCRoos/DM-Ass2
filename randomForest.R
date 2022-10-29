@@ -30,7 +30,3 @@ classificationRandomForest <- function (trainingSet, testSet, seed){
   getScore(random.forests.predictions.table)
 
 }
-
-classificationRandomForest(train.unigram, test.unigram, seed=1)
-
-
