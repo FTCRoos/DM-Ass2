@@ -2,17 +2,21 @@ library(entropy)
 
 multinomailNaiveBayes <- function(trainingSet, testSet, seed, includeBigrams){
   set.seed(seed)
+  labels.train <- trainingSet$labels
+  trainingSet <- within(trainingSet, rm(labels))
+  labels.test <- testSet$labels
+  testSet <- within(testSet, rm(labels))
   # feature selection (with mutual information, only for unigrams)
   trainingSet.mi <- apply(trainingSet, 2, function(x, y){
     mi.plugin(table(x,y)/length(y))
-  }, trainingSet$labels)
+  }, labels.train)
   
   trainingSet.mi.order <- order(trainingSet.mi, decreasing = T)
   
   # feature selection (with mutual information)
   training.dtm.mi <- apply(trainingSet, 2, function(x, y){
     mi.plugin(table(x,y)/length(y))
-  }, trainingSet$labels)
+  }, labels.train)
   
   training.dtm.mi.order <- order(training.dtm.mi,decreasing = T)
   
@@ -22,11 +26,11 @@ multinomailNaiveBayes <- function(trainingSet, testSet, seed, includeBigrams){
   
   # first model (with feature selection according to mutual information) (only unigrams)
   accuracies.unigrams.mi.models <- sapply(c(2:307), function(num.features){
-    model.mi <- train.mnb(trainingSet[,trainingSet.mi.order[1:num.features]], trainingSet$labels) 
+    model.mi <- train.mnb(trainingSet[,trainingSet.mi.order[1:num.features]], labels.train) 
     
     predictions.mi <- predict.mnb(model.mi, testSet[,trainingSet.mi.order[1:num.features]])
 
-    conf.mat <- table(predictions.mi, testSet$labels)
+    conf.mat <- table(predictions.mi, labels.test)
     
     return (sum(diag(conf.mat)) / 180)
   })
@@ -37,21 +41,21 @@ multinomailNaiveBayes <- function(trainingSet, testSet, seed, includeBigrams){
   #print(accuracies.unigrams.best.n)
   plot(accuracies.unigrams.mat[,2], accuracies.unigrams.mat[,1], xlab = "n", ylab = "accuracy", type = "l")
   
-  model.unigrams.mi <- train.mnb(trainingSet[,trainingSet.mi.order[1:accuracies.unigrams.best.n]], trainingSet$labels) 
-  #print(model.unigrams.mi)
+  model.unigrams.mi <- train.mnb(trainingSet[,trainingSet.mi.order[1:accuracies.unigrams.best.n]], labels.train) 
+  print(model.unigrams.mi)
   
   naive.bayes.predictions.unigrams.mi <- predict.mnb(model.unigrams.mi, testSet[,trainingSet.mi.order[1:accuracies.unigrams.best.n]])
-  naive.bayes.predictions.unigrams.mi.table <- table(naive.bayes.predictions.unigrams.mi, testSet$labels)
+  naive.bayes.predictions.unigrams.mi.table <- table(naive.bayes.predictions.unigrams.mi, labels.test)
   print(naive.bayes.predictions.unigrams.mi.table)
   getScore(naive.bayes.predictions.unigrams.mi.table)
   
   #second model (with feature selection according to mutual information) (both unigrams and bigrams)
   accuracies.mi.models <- sapply(c(2:307), function(num.features){
-    model.mi <- train.mnb(trainingSet[,training.dtm.mi.order[1:num.features]], trainingSet$labels) 
+    model.mi <- train.mnb(trainingSet[,training.dtm.mi.order[1:num.features]], labels.train) 
     
     predictions.mi <- predict.mnb(model.mi, testSet[,training.dtm.mi.order[1:num.features]])
     
-    conf.mat <- table (predictions.mi, testSet$labels)
+    conf.mat <- table (predictions.mi, labels.test)
     
     return (sum(diag(conf.mat)) / 180)
   })
@@ -62,11 +66,11 @@ multinomailNaiveBayes <- function(trainingSet, testSet, seed, includeBigrams){
   #print(accuracies.best)
   
   plot(accuracies.mat[,2], accuracies.mat[,1], xlab = "n", ylab = "accuracy", type = "l")
-  model.mi <- train.mnb(trainingSet[,training.dtm.mi.order[1:accuracies.best] ], trainingSet$labels) 
+  model.mi <- train.mnb(trainingSet[,training.dtm.mi.order[1:accuracies.best] ], labels.train) 
   #print(model.mi)
   
   naive.bayes.predictions.mi <- predict.mnb(model.mi , testSet[,training.dtm.mi.order[1:accuracies.best]])
-  naive.bayes.predictions.mi.table <- table(naive.bayes.predictions.mi, testSet$labels)
+  naive.bayes.predictions.mi.table <- table(naive.bayes.predictions.mi, labels.test)
   print(naive.bayes.predictions.mi.table)
   getScore(naive.bayes.predictions.mi.table)
   
