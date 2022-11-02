@@ -1,6 +1,7 @@
 library(entropy)
 
-multinomailNaiveBayes <- function(trainingSet, testSet, seed){
+multinomailNaiveBayes <- function(trainingSet, testSet, seed, includeBigrams){
+  set.seed(seed)
   # feature selection (with mutual information, only for unigrams)
   trainingSet.mi <- apply(trainingSet, 2, function(x, y){
     mi.plugin(table(x,y)/length(y))
@@ -40,7 +41,9 @@ multinomailNaiveBayes <- function(trainingSet, testSet, seed){
   #print(model.unigrams.mi)
   
   naive.bayes.predictions.unigrams.mi <- predict.mnb(model.unigrams.mi, testSet[,trainingSet.mi.order[1:accuracies.unigrams.best.n]])
-  print(table(naive.bayes.predictions.unigrams.mi, testSet$labels))
+  naive.bayes.predictions.unigrams.mi.table <- table(naive.bayes.predictions.unigrams.mi, testSet$labels)
+  print(naive.bayes.predictions.unigrams.mi.table)
+  getScore(naive.bayes.predictions.unigrams.mi.table)
   
   #second model (with feature selection according to mutual information) (both unigrams and bigrams)
   accuracies.mi.models <- sapply(c(2:307), function(num.features){
@@ -63,7 +66,15 @@ multinomailNaiveBayes <- function(trainingSet, testSet, seed){
   #print(model.mi)
   
   naive.bayes.predictions.mi <- predict.mnb(model.mi , testSet[,training.dtm.mi.order[1:accuracies.best]])
-  print(table(naive.bayes.predictions.mi, testSet$labels))
+  naive.bayes.predictions.mi.table <- table(naive.bayes.predictions.mi, testSet$labels)
+  print(naive.bayes.predictions.mi.table)
+  getScore(naive.bayes.predictions.mi.table)
+  
+  if (includeBigrams) {
+    return(naive.bayes.predictions.mi)
+  } else {
+    return(naive.bayes.predictions.unigrams.mi)
+  }
 }
 
 # Naive Bayes training function: labels = classes
