@@ -25,7 +25,7 @@ log.uni.pred <- logisticRegression(train.unigram, test.unigram, seed=1)
 log.both.pred <- logisticRegression(train.both, test.both, seed=1)
 
 # tree prediction
-tree.uni.pred <- classificationTree(train.unigrams, test.unigram, seed=1)
+tree.uni.pred <- classificationTree(train.unigram, test.unigram, seed=1)
 tree.both.pred <- classificationTree(train.both, test.both, seed=1)
 
 # forest predictions

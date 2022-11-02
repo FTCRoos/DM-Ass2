@@ -46,7 +46,7 @@ multinomailNaiveBayes <- function(trainingSet, testSet, seed, includeBigrams){
   
   naive.bayes.predictions.unigrams.mi <- predict.mnb(model.unigrams.mi, testSet[,trainingSet.mi.order[1:accuracies.unigrams.best.n]])
   naive.bayes.predictions.unigrams.mi.table <- table(naive.bayes.predictions.unigrams.mi, labels.test)
-  print(naive.bayes.predictions.unigrams.mi.table)
+  # print(naive.bayes.predictions.unigrams.mi.table)
   getScore(naive.bayes.predictions.unigrams.mi.table)
   
   #second model (with feature selection according to mutual information) (both unigrams and bigrams)
@@ -71,7 +71,7 @@ multinomailNaiveBayes <- function(trainingSet, testSet, seed, includeBigrams){
   
   naive.bayes.predictions.mi <- predict.mnb(model.mi , testSet[,training.dtm.mi.order[1:accuracies.best]])
   naive.bayes.predictions.mi.table <- table(naive.bayes.predictions.mi, labels.test)
-  print(naive.bayes.predictions.mi.table)
+  #print(naive.bayes.predictions.mi.table)
   getScore(naive.bayes.predictions.mi.table)
   
   if (includeBigrams) {
