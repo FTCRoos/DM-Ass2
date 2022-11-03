@@ -14,10 +14,13 @@ multinomailNaiveBayes <- function(trainingSet, testSet, seed){
   
   trainingSet.mi.order <- order(trainingSet.mi, decreasing = T)
   
+  print(trainingSet.mi.order)
+  
   # print(dim(trainingSet))
   
   # training the model with feature selection according to mutual information
   accuracies.mi.models <- sapply(c(2:length(trainingSet)), function(num.features){
+    print(num.features)
     model.mi <- train.mnb(trainingSet[,trainingSet.mi.order[1:num.features]], labels.train) 
     
     predictions.mi <- predict.mnb(model.mi, testSet[,trainingSet.mi.order[1:num.features]])
@@ -27,8 +30,12 @@ multinomailNaiveBayes <- function(trainingSet, testSet, seed){
     return (sum(diag(conf.mat)) / 180)
   })
   
+  print(accuracies.mi.models)
+  
   accuracies.mat <- cbind(accuracies.mi.models, c(2:length(testSet)))
   accuracies.best.n <- accuracies.mat[which.max(accuracies.mat[,1]), 2]
+  
+  print(trainingSet[,trainingSet.mi.order[1:accuracies.best.n]])
   
   plot(accuracies.mat[,2], accuracies.mat[,1], xlab = "n", ylab = "accuracy", type = "l")
   model.mi <- train.mnb(trainingSet[,trainingSet.mi.order[1:accuracies.best.n]], labels.train)

@@ -26,7 +26,7 @@ classificationTree <- function(trainingSet, testSet, seed) {
   reviews.rpart.pred <- predict(reviews.rpart.pruned, newdata=testSet,type="class")
   # show confusion matrix
   reviews.rpart.pred.table <- table(reviews.rpart.pred,testSet$labels)
-  print(reviews.rpart.pred.table)
+  
   getScore(reviews.rpart.pred.table)
   return (reviews.rpart.pred)
 }
