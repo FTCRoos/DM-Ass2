@@ -15,5 +15,7 @@ mcnemar.function <- function (model1.pred, model2.pred, test) {
   })
   
   conf.matrix <- table(model1.pred.is.correct, model2.pred.is.correct)
+  print(conf.matrix)
+  
   print(mcnemar.test(conf.matrix))
 }

@@ -28,6 +28,6 @@ classificationRandomForest <- function (trainingSet, testSet, seed){
   random.forests.predictions <- predict(classifier, newdata = newX)
   random.forests.predictions.table <- table(random.forests.predictions,testSet$labels)
   getScore(random.forests.predictions.table)
+  
   return (random.forests.predictions)
-
 }

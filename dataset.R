@@ -41,9 +41,8 @@ getDatasets <- function(includeBigrams){
   training.dtm.unigrams <- removeSparseTerms(training.dtm.unigrams,0.95)
   training.dtm.unigrams <- as.matrix(training.dtm.unigrams)
   
-
   #extraction of bigrams
-  BigramTokenizer <-function(x) unlist(lapply(ngrams(words(x), 2), paste, collapse = " "), use.names = FALSE)
+  BigramTokenizer <- function(x) unlist(lapply(ngrams(words(x), 2), paste, collapse = " "), use.names = FALSE)
   training.dtm.bigrams <- DocumentTermMatrix(training.dtm,control = list(tokenize = BigramTokenizer))
   training.dtm.bigrams <- removeSparseTerms(training.dtm.bigrams,0.95)
   training.dtm.bigrams <- as.matrix(training.dtm.bigrams)

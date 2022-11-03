@@ -107,17 +107,34 @@ better       0.010176678 0.0129475703
 offer        0.004098940 0.0038363171
 bathroom     0.011590106 0.0142263427
 
+Top 5 for 0:
+                       0            1
+room         0.113356890 0.1062979540
+hotel        0.104734982 0.0983056266
+chicago      0.052720848 0.0241368286
+service      0.028268551 0.0292519182
+like         0.023462898 0.0179028133
+
+Top 5 for 1:
+                       0            1
+room         0.113356890 0.1062979540
+hotel        0.104734982 0.0983056266
+service      0.028268551 0.0292519182
+night        0.018657244 0.0255754476
+staff        0.019787986 0.0254156010
+
 CONFUSION MATRIX:
-naive.bayes.predictions.unigrams.mi  0  1
-                                  0 66 11
-                                  1 14 69
+                          labels.test
+naive.bayes.predictions.mi  0  1
+                         0 66 11
+                         1 14 69
 [1] "ACCURACY:  0.84375"
 [1] "PRECISION:  0.825"
 [1] "RECALL: 0.857142857142857"
 [1] "F1: 0.840764331210191"
 
-------------------------------------------------------------------------
-Multinomial Naive Bayes using bigrams:
+---------------------------------------------------
+Multinomial Naive Bayes using both:
                         0            1
 chicago       0.044462987 0.0202711773
 location      0.004410538 0.0142300980
@@ -250,54 +267,73 @@ bad           0.006913816 0.0063095718
 never         0.009536298 0.0146328366
 weekend       0.006317797 0.0044301248
 
-CONFUSION MATRIX:
-naive.bayes.predictions.unigrams.mi  0  1
-                                  0 66 11
-                                  1 14 69
-[1] "ACCURACY:  0.84375"
-[1] "PRECISION:  0.825"
-[1] "RECALL: 0.857142857142857"
-[1] "F1: 0.840764331210191"
+Top 5 for 0:
+                        0            1
+room          0.095601383 0.0892737280
+hotel         0.088329956 0.0825614176
+chicago       0.044462987 0.0202711773
+service       0.023840744 0.0245670560
+like          0.019787817 0.0150355752
 
-------------------------------------------------------------------------
+Top 5 for 1:
+                        0            1
+room          0.095601383 0.0892737280
+hotel         0.088329956 0.0825614176
+service       0.023840744 0.0245670560
+staff         0.016688521 0.0213451470
+chicago       0.044462987 0.0202711773
+
+CONFUSION MATRIX:
+                          labels.test
+naive.bayes.predictions.mi  0  1
+                         0 64 10
+                         1 16 70
+[1] "ACCURACY:  0.8375"
+[1] "PRECISION:  0.8"
+[1] "RECALL: 0.864864864864865"
+[1] "F1: 0.831168831168831"
+[1] 0.02368937
+
+---------------------------------------------------
 Logistic regression using unigrams:
 
+CONFUSION MATRIX:       
 reviews.logreg.pred  0  1
                   0 57  8
                   1 23 72
+
 [1] "ACCURACY:  0.80625"
 [1] "PRECISION:  0.7125"
 [1] "RECALL: 0.876923076923077"
 [1] "F1: 0.786206896551724"
 [1] 0.02368937
 
-------------------------------------------------------------------------
-Logistic regression using bigrams:
+---------------------------------------------------
+Logistic regression using both:
 
-CONFUSION MATRIX:            
+CONFUSION MATRIX:  
 reviews.logreg.pred  0  1
                   0 51  8
                   1 29 72
+
 [1] "ACCURACY:  0.76875"
 [1] "PRECISION:  0.6375"
 [1] "RECALL: 0.864406779661017"
 [1] "F1: 0.733812949640288"
 [1] 0.01875
 
-------------------------------------------------------------------------
+---------------------------------------------------
 Classification tree using unigrams:
 
 Variables actually used in tree construction:
- [1] able        actually    air         almost      already     also        although    another    
- [9] anything    area        around      arrived     asked       back        bad         bar        
-[17] bathroom    beds        better      big         carpet      charge      check       chicago    
-[25] coffee      comfortable conference  couldnt     decided     desk        didnt       dirty      
-[33] door        elevator    every       expected    far         finally     first       found      
-[41] friendly    good        great       guest       guests      hard        hotel       husband    
-[49] internet    ive         last        lobby       location    long        looked      many       
-[57] money       much        need        new         offered     old         one         pay        
-[65] person      rate        really      received    recently    reviews     rooms       said       
-[73] several     sheets      smell       someone     spend       star        still       terrible   
+ [1] able        actually    air         almost      already     also        although    another     anything    area       
+[11] around      arrived     asked       back        bad         bar         bathroom    beds        better      big        
+[21] carpet      charge      check       chicago     coffee      comfortable conference  couldnt     decided     desk       
+[31] didnt       dirty       door        elevator    every       expected    far         finally     first       found      
+[41] friendly    good        great       guest       guests      hard        hotel       husband     internet    ive        
+[51] last        lobby       location    long        looked      many        money       much        need        new        
+[61] offered     old         one         pay         person      rate        really      received    recently    reviews    
+[71] rooms       said        several     sheets      smell       someone     spend       star        still       terrible   
 [81] toilet      told        try         wasnt       water       website     will       
 
 Root node error: 320/640 = 0.5
@@ -319,31 +355,30 @@ n= 640
 12 0.0031250     49  0.159375 0.65000 0.037028
 13 0.0015625     91  0.028125 0.67500 0.037383
 14 0.0000000    109  0.000000 0.69375 0.037629
-
-CONFUSION MATRIX:
+                  
+CONFUSION MATRIX:         
 reviews.rpart.pred  0  1
                  0 48 23
                  1 32 57
+
 [1] "ACCURACY:  0.65625"
 [1] "PRECISION:  0.6"
 [1] "RECALL: 0.676056338028169"
 [1] "F1: 0.635761589403973"
 [1] 0.01875
 
-------------------------------------------------------------------------
-Classification tree using bigrams:
+---------------------------------------------------
+Classification tree using both:
 
 Variables actually used in tree construction:
- [1] able        air         almost      already     also        another     anyone      anything   
- [9] area        around      arrived     asked       back        bad         bar         bathroom   
-[17] beds        better      big         carpet      charge      check       chicago     coffee     
-[25] comfortable conference  couldnt     decided     desk        dirty       door        elevator   
-[33] every       expected    finally     first       found       front       given       good       
-[41] great       guest       guests      hard        hotel       internet    ive         last       
-[49] lobby       location    looked      many        money       much        need        night      
-[57] offered     old         one         pay         person      rate        really      received   
-[65] recently    reviews     rooms       said        several     sheets      smell       someone    
-[73] spend       star        stay        still       toilet      told        try         upon       
+ [1] able        air         almost      already     also        another     anyone      anything    area        around     
+[11] arrived     asked       back        bad         bar         bathroom    beds        better      big         carpet     
+[21] charge      check       chicago     coffee      comfortable conference  couldnt     decided     desk        dirty      
+[31] door        elevator    every       expected    finally     first       found       front       given       good       
+[41] great       guest       guests      hard        hotel       internet    ive         last        lobby       location   
+[51] looked      many        money       much        need        night       offered     old         one         pay        
+[61] person      rate        really      received    recently    reviews     rooms       said        several     sheets     
+[71] smell       someone     spend       star        stay        still       toilet      told        try         upon       
 [81] wasnt       water       will        will.never 
 
 Root node error: 320/640 = 0.5
@@ -365,18 +400,19 @@ n= 640
 12 0.0031250     49  0.159375 0.65313 0.037074
 13 0.0015625     93  0.021875 0.64688 0.036982
 14 0.0000000    107  0.000000 0.66250 0.037209
-
-CONFUSION MATRIX:               
+                  
+CONFUSION MATRIX:    
 reviews.rpart.pred  0  1
                  0 48 23
                  1 32 57
+
 [1] "ACCURACY:  0.65625"
 [1] "PRECISION:  0.6"
 [1] "RECALL: 0.676056338028169"
 [1] "F1: 0.635761589403973"
 
-------------------------------------------------------------------------
-Random forest using unigrams:
+---------------------------------------------------
+Random forests using unigrams:
 
 mtry = 17  OOB error = 18.75% 
 Searching left ...
@@ -395,7 +431,7 @@ mtry = 34 	OOB error = 18.91%
 [1] 9
 [1] 519
 
-CONFUSION MATRIX:                
+CONFUSION MATRIX:                          
 random.forests.predictions  0  1
                          0 14  3
                          1 66 77
@@ -404,8 +440,8 @@ random.forests.predictions  0  1
 [1] "RECALL: 0.823529411764706"
 [1] "F1: 0.288659793814433"
 
-------------------------------------------------------------------------
-Random forest using bigrams:
+---------------------------------------------------
+Random forests using unigrams:
 
 mtry = 17  OOB error = 17.19% 
 Searching left ...
@@ -421,7 +457,7 @@ mtry = 34 	OOB error = 19.84%
 [1] 17
 [1] 850
 
-CONFUSION MATRIX:
+CONFUSION MATRIX:                          
 random.forests.predictions  0  1
                          0 13  3
                          1 67 77
@@ -430,35 +466,96 @@ random.forests.predictions  0  1
 [1] "RECALL: 0.8125"
 [1] "F1: 0.270833333333333"
 
-------------------------------------------------------------------------
+----------------------------------------------------
 McNemar's Chi-squared tests with continuity correction:
 
-Multinomial Naive Bayes vs. Logistic regression, both using unigrams.
+1: Multinomial Naive Bayes vs. Logistic regression, using unigrams
+
+                      model2.pred.is.correct
+model1.pred.is.correct   0   1
+                     0  15  10
+                     1  16 119
+
 McNemar's chi-squared = 0.96154, df = 1, p-value = 0.3268
 
-Multinomial Naive Bayes vs. Logistic regression, both using bigrams.
-McNemar's chi-squared = 3.375, df = 1, p-value = 0.06619
+2: Multinomial Naive Bayes vs. Logistic regression, using both
+                      model2.pred.is.correct
+model1.pred.is.correct   0   1
+                     0  19   7
+                     1  18 116
 
-Random forest vs. Multinomial Naive Bayes, both using unigrams.
+McNemar's chi-squared = 4, df = 1, p-value = 0.0455
+
+3: Random forests vs Multinomial Naive Bayes, using unigrams
+
+                      model2.pred.is.correct
+model1.pred.is.correct  0  1
+                     0 14 55
+                     1 11 80
+
 McNemar's chi-squared = 28.015, df = 1, p-value = 1.204e-07
 
-Random forest vs. Logistic regression, both using unigrams.
+4: Random forests vs Logistic regression, using unigrams
+
+                      model2.pred.is.correct
+model1.pred.is.correct  0  1
+                     0 24 45
+                     1  7 84
+
 McNemar's chi-squared = 26.327, df = 1, p-value = 2.882e-07
 
-Random forest vs. Multinomial Naive Bayes, both using bigrams.
-McNemar's chi-squared = 28.918, df = 1, p-value = 7.551e-08
+5: Random forests vs Multinomial Naive Bayes, using both
 
-Random forest vs. Logistic regression, both using bigrams.
+                      model2.pred.is.correct
+model1.pred.is.correct  0  1
+                     0 17 53
+                     1  9 81
+
+McNemar's chi-squared = 29.823, df = 1, p-value = 4.734e-08
+
+6: Random forests vs Logistic regression, using both
+
+                      model2.pred.is.correct
+model1.pred.is.correct  0  1
+                     0 31 39
+                     1  6 84
+
 McNemar's chi-squared = 22.756, df = 1, p-value = 1.84e-06
 
-Classification tree using unigrams vs. Classification tree using bigrams
+7: Classification tree using unigrams vs. Classification tree using both
+
+                      model2.pred.is.correct
+model1.pred.is.correct   0   1
+                     0  55   0
+                     1   0 105
+
+	McNemar's Chi-squared test
+
+data:  conf.matrix
 McNemar's chi-squared = NaN, df = 1, p-value = NA
 
-Random forests using unigrams vs. Random forests using bigrams
+8: Random forests using unigrams vs. Random forests using both
+
+                      model2.pred.is.correct
+model1.pred.is.correct  0  1
+                     0 69  0
+                     1  1 90
+
 McNemar's chi-squared = 0, df = 1, p-value = 1
 
-Logistic regression using unigrams vs. Logistic regression using bigrams
+9: Logistic regression using unigrams vs. Logistic regression using both
+
+                      model2.pred.is.correct
+model1.pred.is.correct   0   1
+                     0  31   0
+                     1   6 123
+
 McNemar's chi-squared = 4.1667, df = 1, p-value = 0.04123
 
-Multinomial Naive Bayes using unigrams vs. Multinomial Naive Bayes using bigrams 
-McNemar's chi-squared = 0.25, df = 1, p-value = 0.6171
+10: Multinomial Naive Bayes using unigrams vs. Multinomial Naive Bayes using both
+                      model2.pred.is.correct
+model1.pred.is.correct   0   1
+                     0  23   2
+                     1   3 132
+
+McNemar's chi-squared = 0, df = 1, p-value = 1

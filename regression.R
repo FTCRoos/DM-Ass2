@@ -10,7 +10,7 @@ logisticRegression <- function(trainingSet, testSet, seed){
   newX <- model.matrix(testSet$labels~., data = testSet)
   reviews.logreg.pred <- predict(reviews.glmnet,newx=newX,s="lambda.1se",type="class") 
   reviews.logreg.pred.table <- table(reviews.logreg.pred,testSet$labels)
-  print(reviews.logreg.pred.table)
+  
   getScore(reviews.logreg.pred.table)
   return(reviews.logreg.pred)
 }

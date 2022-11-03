@@ -17,8 +17,8 @@ train.both <- ds.both$train
 test.both <- ds.both$test
 
 # bayes predictions
-bayes.uni.pred <- multinomailNaiveBayes(train.unigram, test.unigram, seed=1, FALSE)
-bayes.both.pred <- multinomailNaiveBayes(train.both, test.both, seed=1, TRUE)
+bayes.uni.pred <- multinomailNaiveBayes(train.unigram, test.unigram, seed=1)# using unigram
+bayes.both.pred <- multinomailNaiveBayes(train.both, test.both, seed=1)     # using both: unigram and bigram
 
 # logistic regression predictions 
 log.uni.pred <- logisticRegression(train.unigram, test.unigram, seed=1)
