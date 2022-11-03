@@ -441,7 +441,7 @@ random.forests.predictions  0  1
 [1] "F1: 0.288659793814433"
 
 ---------------------------------------------------
-Random forests using unigrams:
+Random forests using both:
 
 mtry = 17  OOB error = 17.19% 
 Searching left ...
